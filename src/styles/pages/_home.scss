@@ -1,0 +1,31 @@
+.homeHeader {
+  padding: 0;
+}
+
+.homeTitle {
+  font-size: 3em;
+  text-align: center;
+  margin: 0;
+}
+
+.productGrid {
+
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0 -2em;
+
+  @media (min-width: 960px) {
+    flex-direction: row;
+  }
+
+  li {
+    padding: 2em;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+}
