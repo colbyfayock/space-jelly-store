@@ -7,11 +7,13 @@ export const products = [
     image: imageShirt,
     name: 'Space Jelly Tshirt',
     description: 'Bring Cosmo the space Jellyfish to your wardrobe with this high quality tshirt.',
+    price: 2000
   },
   {
     id: 'spacejelly_stickers',
     image: imageSticker,
     name: 'Space Jelly Stickers',
     description: 'Add some flare to your laptop with a sticker of Cosmo the Space Jellyfish.',
+    price: 1000
   }
 ];

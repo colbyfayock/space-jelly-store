@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet';
 import styles from 'styles/App.module.scss';
 
 import useSite from 'hooks/use-site';
+import useCart from 'hooks/use-cart';
 
 import Layout from 'components/Layout';
 import Section from 'components/Section';
@@ -12,6 +13,9 @@ import FeatureList from 'components/FeatureList';
 import { products } from 'data/products';
 
 export default function Home() {
+
+  const { addItem, removeItem } = useCart();
+
   const { metadata } = useSite();
   const { siteName } = metadata;
 
@@ -40,7 +44,18 @@ export default function Home() {
                   <img src={product.image} />
                   <h2>{ product.name }</h2>
                   <p>{ product.description }</p>
-                  <Button>Add to Cart</Button>
+                  <Button onClick={() => {
+                    addItem({
+                      id: product.id,
+                      quantity: 1
+                    })
+                  }}>Add to Cart</Button>
+                  <Button onClick={() => {
+                    removeItem({
+                      id: product.id,
+                      quantity: 1
+                    })
+                  }}>Remove From Cart</Button>
                 </li>
               )
             })}
