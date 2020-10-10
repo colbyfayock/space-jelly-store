@@ -5,7 +5,7 @@ import imageCombo from 'images/spacejelly-combo.jpg';
 export const products = [
   {
     id: 1,
-    sku: 'spacejelly_tshirt',
+    sku: 'price_1HaWIiACRi3UkZb2UAiHNGzi',
     image: imageShirt,
     name: 'Space Jelly Tshirt',
     description: 'Bring Cosmo the space Jellyfish to your wardrobe with this high quality tshirt.',
@@ -13,7 +13,7 @@ export const products = [
   },
   {
     id: 2,
-    sku: 'spacejelly_stickers',
+    sku: 'price_1HaWJMACRi3UkZb2c9Yw1zU2',
     image: imageSticker,
     name: 'Space Jelly Stickers',
     description: 'Add some flare to your laptop with a sticker of Cosmo the Space Jellyfish.',
@@ -21,7 +21,7 @@ export const products = [
   },
   {
     id: 3,
-    sku: 'spacejelly_combo',
+    sku: 'price_1HaWM1ACRi3UkZb2VlHZFfY7',
     image: imageCombo,
     name: 'Space Jelly Combo',
     description: 'Show your love for Cosmo with a tshirt and sticker combo pack!',

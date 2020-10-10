@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { FaShoppingCart } from 'react-icons/fa';
 
 import { formatCurrency } from 'lib/currency';
+import { initCheckout } from 'lib/payments';
 import useSite from 'hooks/use-site';
 import useCart from 'hooks/use-cart';
 
@@ -24,17 +25,6 @@ export default function Home() {
 
   const { metadata } = useSite();
   const { siteName } = metadata;
-
-  /**
-   * handleOnUpdateItem
-   */
-
-  function handleOnUpdateItem({ id, quantity }) {
-    updateItemQuantity({
-      id,
-      quantity
-    })
-  }
 
   // Filter out any items that the customer doesn't want
 
@@ -76,6 +66,36 @@ export default function Home() {
     }
   ];
 
+  /**
+   * handleOnUpdateItem
+   */
+
+  function handleOnUpdateItem({ id, quantity }) {
+    updateItemQuantity({
+      id,
+      quantity
+    })
+  }
+
+  /**
+   * handleOnCheckout
+   */
+
+  function handleOnCheckout() {
+    const lineItems = cartItems.map(({ id, quantity }) => {
+      const product = products.find(product => product.id === id);
+      const { sku } = product;
+      return {
+        price: sku,
+        quantity
+      }
+    });
+
+    initCheckout({
+      lineItems
+    })
+  }
+
   return (
     <Layout>
 
@@ -94,7 +114,7 @@ export default function Home() {
 
           {data.length > 0 && (
             <p className={styles.cartCheckout}>
-              <Button>Check Out with Stripe</Button>
+              <Button onClick={handleOnCheckout}>Check Out with Stripe</Button>
             </p>
           )}
 
