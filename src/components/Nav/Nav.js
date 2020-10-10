@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FaShoppingCart } from 'react-icons/fa';
 
 import useSite from 'hooks/use-site';
@@ -22,10 +23,12 @@ const Nav = () => {
             <a href="/">{ siteName }</a>
           </p>
           <p className={styles.navCart}>
-            <button>
-              <FaShoppingCart />
-              <span>{subtotal}</span>
-            </button>
+            <Link href="/cart">
+              <a>
+                <FaShoppingCart />
+                <span>{subtotal}</span>
+              </a>
+            </Link>
           </p>
         </Container>
       </Section>

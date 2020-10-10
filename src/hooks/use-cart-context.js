@@ -10,7 +10,7 @@ export default function useCartContext() {
   const [cart, dispatch] = useReducer(reducer, initialState);
 
   const cartItems = Object.keys(cart.products).map(key => {
-    const product = products.find(({ id }) => id === key);
+    const product = products.find(({ id }) => `${id}` === `${key}`);
     return {
       ...cart.products[key],
       pricePerUnit: product.price
@@ -25,23 +25,33 @@ export default function useCartContext() {
    * handleAddItem
    */
 
-  function handleAddItem({ id } = {}) {
-    dispatch(addItem({ id }))
+  function handleAddItem({ id, quantity } = {}) {
+    dispatch(addItem({ id, quantity }))
   }
 
   /**
    * handleRemoveItem
    */
 
-  function handleRemoveItem({ id } = {}) {
-    dispatch(removeItem({ id }))
+  function handleRemoveItem({ id, quantity } = {}) {
+    dispatch(removeItem({ id, quantity }))
+  }
+
+  /**
+   * handleUpdateItemQuantity
+   */
+
+  function handleUpdateItemQuantity({ id, quantity } = {}) {
+    dispatch(updateItemQuantity({ id, quantity }))
   }
 
   return {
+    products,
     subtotal,
     cartItems,
     addItem: handleAddItem,
-    removeItem: handleRemoveItem
+    removeItem: handleRemoveItem,
+    updateItemQuantity: handleUpdateItemQuantity
   };
 
 }
@@ -77,6 +87,16 @@ function reducer(state, action) {
       }
 
       return {...state};
+    case 'UPDATE_QUANTITY':
+        if ( !state.products[data.id] ) {
+          state.products[data.id] = {...data};
+        } else {
+          state.products[data.id] = {
+            ...state.products[data.id],
+            quantity: data.quantity > 0 ? data.quantity : 0
+          }
+        }
+        return {...state};
     default:
       throw new Error();
   }
@@ -87,7 +107,7 @@ function reducer(state, action) {
  */
 
 function addItem({ id, quantity = 1 } = {}) {
-  if ( typeof id !== 'string' ) {
+  if ( typeof id !== 'number' ) {
     throw new Error('Failed to add item to cart: Invalid ID');
   }
   return {
@@ -104,11 +124,28 @@ function addItem({ id, quantity = 1 } = {}) {
  */
 
 function removeItem({ id, quantity = 1 } = {}) {
-  if ( typeof id !== 'string' ) {
+  if ( typeof id !== 'number' ) {
     throw new Error('Failed to remove item from cart: Invalid ID');
   }
   return {
     type: 'REMOVE_ITEM',
+    data: {
+      id,
+      quantity
+    }
+  }
+}
+
+/**
+ * updateItemQuantity
+ */
+
+function updateItemQuantity({ id, quantity = 1 } = {}) {
+  if ( typeof id !== 'number' ) {
+    throw new Error('Failed to remove item from cart: Invalid ID');
+  }
+  return {
+    type: 'UPDATE_QUANTITY',
     data: {
       id,
       quantity

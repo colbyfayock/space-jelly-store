@@ -1,0 +1,20 @@
+.cart {
+
+  td {
+
+    &:last-child {
+      text-align: right;
+    }
+
+  }
+
+}
+
+.cartCheckout {
+  text-align: right;
+}
+
+.cartNoItems {
+  text-align: center;
+  margin-top: 2em;
+}

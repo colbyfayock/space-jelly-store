@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet';
-import styles from 'styles/App.module.scss';
 
 import useSite from 'hooks/use-site';
 import useCart from 'hooks/use-cart';
@@ -7,10 +6,12 @@ import useCart from 'hooks/use-cart';
 import Layout from 'components/Layout';
 import Section from 'components/Section';
 import Container from 'components/Container';
-import Button from 'components/Button';
-import FeatureList from 'components/FeatureList';
+import Header from 'components/Header';
+import ProductGrid from 'components/ProductGrid';
 
 import { products } from 'data/products';
+
+import styles from 'styles/pages/Home.module.scss';
 
 export default function Home() {
 
@@ -18,6 +19,17 @@ export default function Home() {
 
   const { metadata } = useSite();
   const { siteName } = metadata;
+
+  /**
+   * handleAddToCart
+   */
+
+  function handleAddToCart(e, { id }) {
+    addItem({
+      id: id,
+      quantity: 1
+    })
+  }
 
   return (
     <Layout>
@@ -27,39 +39,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
 
-      <Section className={styles.homeHeader}>
-        <Container>
-          <h1 className={styles.homeTitle}>
-            { siteName }
-          </h1>
-        </Container>
-      </Section>
+      <Header>
+        { siteName }
+      </Header>
 
       <Section>
         <Container>
-          <ul className={styles.productGrid}>
-            {products.map(product => {
-              return (
-                <li key={product.id}>
-                  <img src={product.image} />
-                  <h2>{ product.name }</h2>
-                  <p>{ product.description }</p>
-                  <Button onClick={() => {
-                    addItem({
-                      id: product.id,
-                      quantity: 1
-                    })
-                  }}>Add to Cart</Button>
-                  <Button onClick={() => {
-                    removeItem({
-                      id: product.id,
-                      quantity: 1
-                    })
-                  }}>Remove From Cart</Button>
-                </li>
-              )
-            })}
-          </ul>
+          <ProductGrid products={products} onAddToCart={handleAddToCart} />
         </Container>
       </Section>
 

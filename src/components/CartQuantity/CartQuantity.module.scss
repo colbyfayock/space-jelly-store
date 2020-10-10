@@ -1,0 +1,24 @@
+@import "styles/settings/__settings";
+
+$cart-input-height: 30px;
+
+.cartQuantity {
+
+  input {
+    width: 5em;
+    height: $cart-input-height;
+    line-height: $cart-input-height;
+    margin-right: .5em;
+  }
+
+  button {
+    height: $cart-input-height;
+    line-height: $cart-input-height;
+    font-size: .7em;
+    background-color: $color-gray-600;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+  }
+
+}

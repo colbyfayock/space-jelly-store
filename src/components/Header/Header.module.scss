@@ -1,0 +1,20 @@
+@import "styles/settings/__settings";
+
+.header {
+
+  padding: 0;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 3em;
+    margin: 0;
+  }
+
+  svg {
+    margin-right: .5em;
+  }
+
+}

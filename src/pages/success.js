@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet';
-import styles from 'styles/App.module.scss';
 
 import useSite from 'hooks/use-site';
 
