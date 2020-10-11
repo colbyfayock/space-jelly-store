@@ -20,7 +20,9 @@ const Nav = () => {
       <Section className={styles.navSection}>
         <Container className={styles.navContainer}>
           <p className={styles.navName}>
-            <a href="/">{ siteName }</a>
+            <Link href="/">
+              <a>{ siteName }</a>
+            </Link>
           </p>
           <p className={styles.navCart}>
             <Link href="/cart">
