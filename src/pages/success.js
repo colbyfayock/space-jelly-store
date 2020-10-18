@@ -1,29 +1,41 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
-import useSite from 'hooks/use-site';
+import useCart from 'hooks/use-cart';
 
 import Layout from 'components/Layout';
+import Header from 'components/Header';
+import Section from 'components/Section';
+import Container from 'components/Container';
 
-export default function Home() {
-  const { metadata } = useSite();
-  const { siteName } = metadata;
+import styles from 'styles/pages/Success.module.scss';
+
+export default function Success() {
+  const { clearCart } = useCart();
+
+  useEffect(() => {
+    clearCart();
+  }, [])
 
   return (
     <Layout>
 
       <Helmet>
-        <title>{ siteName }</title>
+        <title>Success</title>
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
 
-      <h1>
+      <Header>
         Success
-      </h1>
+      </Header>
 
-      <p>
-        Get started by editing{' '}
-        <code>pages/index.js</code>
-      </p>
+      <Section className={styles.successContent}>
+        <Container>
+          <p className={styles.successThankYou}>
+            Thank you for your order!
+          </p>
+        </Container>
+      </Section>
 
     </Layout>
   )

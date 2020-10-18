@@ -1,4 +1,5 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
+import { getStorageItem, setStorageItem } from 'lib/storage';
 
 import { products } from 'data/products';
 
@@ -6,8 +7,16 @@ const initialState = {
   products: {}
 }
 
+const CART_STATE_KEY = 'cart';
+
 export default function useCartContext() {
   const [cart, dispatch] = useReducer(reducer, initialState);
+
+  setStorageItem(CART_STATE_KEY, cart);
+
+  useEffect(() => {
+    dispatch(setCart(getInitialState(cart)));
+  }, []);
 
   const cartItems = Object.keys(cart.products).map(key => {
     const product = products.find(({ id }) => `${id}` === `${key}`);
@@ -45,15 +54,34 @@ export default function useCartContext() {
     dispatch(updateItemQuantity({ id, quantity }))
   }
 
+  /**
+   * handleClearCart
+   */
+
+  function handleClearCart() {
+    console.log('clearCart', initialState);
+    dispatch(setCart(initialState));
+  }
+
   return {
     products,
     subtotal,
     cartItems,
     addItem: handleAddItem,
     removeItem: handleRemoveItem,
-    updateItemQuantity: handleUpdateItemQuantity
+    updateItemQuantity: handleUpdateItemQuantity,
+    clearCart: handleClearCart
   };
 
+}
+
+/**
+ * getInitialState
+ */
+
+function getInitialState(initialState) {
+  const cartStateFromStorage = getStorageItem(CART_STATE_KEY);
+  return cartStateFromStorage || initialState;
 }
 
 /**
@@ -64,6 +92,9 @@ function reducer(state, action) {
   const { type, data } = action;
 
   switch (type) {
+    case 'SET_CART':
+      console.log('data', data)
+      return {...data};
     case 'ADD_ITEM':
       if ( !state.products[data.id] ) {
         state.products[data.id] = {...data};
@@ -88,17 +119,28 @@ function reducer(state, action) {
 
       return {...state};
     case 'UPDATE_QUANTITY':
-        if ( !state.products[data.id] ) {
-          state.products[data.id] = {...data};
-        } else {
-          state.products[data.id] = {
-            ...state.products[data.id],
-            quantity: data.quantity > 0 ? data.quantity : 0
-          }
+      if ( !state.products[data.id] ) {
+        state.products[data.id] = {...data};
+      } else {
+        state.products[data.id] = {
+          ...state.products[data.id],
+          quantity: data.quantity > 0 ? data.quantity : 0
         }
-        return {...state};
+      }
+      return {...state};
     default:
       throw new Error();
+  }
+}
+
+/**
+ * setCart
+ */
+
+function setCart(data) {
+  return {
+    type: 'SET_CART',
+    data
   }
 }
 
