@@ -10,9 +10,7 @@ const initialState = {
 const CART_STATE_KEY = 'cart';
 
 export default function useCartContext() {
-  const [cart, dispatch] = useReducer(reducer, initialState);
-
-  setStorageItem(CART_STATE_KEY, cart);
+  const [cart, dispatch] = useReducer(cartReducer, initialState);
 
   useEffect(() => {
     dispatch(setCart(getInitialState(cart)));
@@ -59,7 +57,6 @@ export default function useCartContext() {
    */
 
   function handleClearCart() {
-    console.log('clearCart', initialState);
     dispatch(setCart(initialState));
   }
 
@@ -85,6 +82,16 @@ function getInitialState(initialState) {
 }
 
 /**
+ * cartReducer
+ */
+
+function cartReducer(state, action) {
+  const newState = reducer(state, action);
+  setStorageItem(CART_STATE_KEY, newState);
+  return newState;
+}
+
+/**
  * reducer
  */
 
@@ -93,7 +100,6 @@ function reducer(state, action) {
 
   switch (type) {
     case 'SET_CART':
-      console.log('data', data)
       return {...data};
     case 'ADD_ITEM':
       if ( !state.products[data.id] ) {
