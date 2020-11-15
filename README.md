@@ -1,18 +1,17 @@
-# Next.js Space Jelly Product Starter
+# Space Jelly Store Demo
 
+Demo ecommerce store for Create an eCommerce Store with Next.js and Stripe Checkout on egghead.io.
 
-
-## ⚡️ Quick Start
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/colbyfayock/next-product-starter)
+https://space-jelly-store.netlify.app/
 
 ## 🚀 Getting Started
 
 Run the following command to create a new project with this Starter:
 
 ```
-yarn create next-app my-app -e https://github.com/colbyfayock/next-product-starter
+yarn create next-app my-app -e https://github.com/colbyfayock/spacejelly-store
 # or
-npx create-next-app my-app -e https://github.com/colbyfayock/next-product-starter
+npx create-next-app my-app -e https://github.com/colbyfayock/spacejelly-store
 ```
 
 Once the project and dependencies are finished installing, you can navigate to that directory and start up the development server with:
