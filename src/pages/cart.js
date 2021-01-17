@@ -15,7 +15,7 @@ import Table from 'components/Table';
 import CartQuantity from 'components/CartQuantity';
 import Button from 'components/Button';
 
-import { products } from 'data/products';
+import products from 'data/products.json';
 
 import styles from 'styles/pages/Cart.module.scss';
 

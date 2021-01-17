@@ -9,7 +9,7 @@ import Section from 'components/Section';
 import Container from 'components/Container';
 import Button from 'components/Button';
 
-import { products } from 'data/products';
+import products from 'data/products.json';
 
 import styles from 'styles/pages/Product.module.scss';
 

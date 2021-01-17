@@ -9,7 +9,7 @@ import Container from 'components/Container';
 import Header from 'components/Header';
 import ProductGrid from 'components/ProductGrid';
 
-import { products } from 'data/products';
+import products from 'data/products.json';
 
 import styles from 'styles/pages/Home.module.scss';
 

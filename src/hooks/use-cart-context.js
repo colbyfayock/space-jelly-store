@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from 'react';
 import { getStorageItem, setStorageItem } from 'lib/storage';
 
-import { products } from 'data/products';
+import products from 'data/products.json';
 
 const initialState = {
   products: {}
